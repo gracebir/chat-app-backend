@@ -37,7 +37,10 @@ export const signup = async (req, res) => {
 
   delete user.password;
 
-  return res.json(user);
+  return res.json({
+    statusCode: 201,
+    user,
+  });
 };
 
 export const signin = async (req, res) => {
@@ -54,25 +57,28 @@ export const signin = async (req, res) => {
       return res.status(401).json({ message: "Incorrect password!" });
     generateTokenAndSetCookie(user._id, res);
     return res.status(200).json({
+      statusCode: 200,
+      user: {
         _id: user.id,
         email: user.email,
         fullname: user.fullname,
         profilePic: user.profilePic,
-        gender: user.gender
-    })
+        gender: user.gender,
+      },
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 };
 
 export const signout = async (req, res) => {
-    try {
-        res.cookie("jwt", "", {maxAge: 0})
-        return res.status(200).json({
-            message: "Logout successfully"
-        })
-    } catch (error) {
-        console.log("Error logout", error.message)
-        res.status(500).json({message: "Internal server error"})
-    }
+  try {
+    res.cookie("jwt", "", { maxAge: 0 });
+    return res.status(200).json({
+      message: "Logout successfully",
+    });
+  } catch (error) {
+    console.log("Error logout", error.message);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
