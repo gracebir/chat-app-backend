@@ -17,7 +17,7 @@ import { app, server } from './socket/socket.js'
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: process.env.CLIENT_URL,  // The URL of your frontend app
+    origin: "*",  // The URL of your frontend app
     credentials: true,
 }))
 
