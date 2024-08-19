@@ -17,7 +17,7 @@ import { app, server } from './socket/socket.js'
 app.use(express.json())
 app.use(cookieParser())
 app.use(cors({
-    origin: "*",  // The URL of your frontend app
+    origin: "https://chat-app-sooty-one.vercel.app",  // The URL of your frontend app
     credentials: true,
 }))
 
